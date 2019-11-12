@@ -1,6 +1,9 @@
 from flask import Flask 
 from flask import Flask, jsonify
 from flask import request
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
 app = Flask(__name__) 
   
 #@app.route('/hello') 
@@ -41,6 +44,9 @@ def create_task():
     }
     tasks.append(task)
     return jsonify({'task': task}), 201
+@csrf_exempt
+def hello(request):
+    return HttpResponse('pong')
 
 if __name__ == '__main__':
     app.run(debug=True)
